@@ -1,4 +1,4 @@
-public class Conta {
+public abstract class Conta {
 
     String numeroConta;
     String nomeCliente;
