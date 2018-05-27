@@ -5,17 +5,7 @@ public class GerenciarContas {
     private ArrayList<Conta> contas = new ArrayList<>();
 
     public void adicionarConta(Conta c) {
-
-        boolean validation = false;
-        int maior = 0;
-        for (Conta conta : contas) {
-            validation = conta.getNumeroConta() == c.getNumeroConta();
-            if (conta.getNumeroConta() > maior) maior = conta.getNumeroConta();
-        }
-        if (validation) {
-            contas.add(c);
-        }
-
+        contas.add(c);
     }
 
     public boolean removerConta(int numeroConta) {
@@ -35,7 +25,7 @@ public class GerenciarContas {
         StringBuilder dados = new StringBuilder();
 
         for (Conta conta : contas) {
-            if (conta.getClass().equals(ContaEspecial.class)) {
+            if (conta instanceof ContaEspecial) {
                 dados.append(conta.imprimir()).append("\n");
             }
 
@@ -52,12 +42,11 @@ public class GerenciarContas {
     public String buscarClientesUsandoLimite() {
         StringBuilder dados = new StringBuilder();
 
-        for (int i = 0; i < contas.size(); i++) {
+        for (Conta conta : contas) {
 
-            if (contas.get(i).getClass().equals(ContaCorrente.class)) {
-                ContaCorrente cCorrente = (ContaCorrente) contas.get(i);
-                if (cCorrente.usandoLimite()) {
-                    dados.append("\nConta ").append(i).append(":\n").append(contas.get(i).imprimir());
+            if (conta instanceof ContaCorrente) {
+                if (((ContaCorrente) conta).usandoLimite()) {
+                    dados.append(conta.imprimir()).append("\n");
                 }
             }
         }
@@ -102,11 +91,11 @@ public class GerenciarContas {
     public boolean sacar(int numeroConta, double valorSacado) {
 
         if (valorSacado > 0) {
-            for (int i = 0; i <= contas.size(); i++) {
+            for (Conta conta : contas) {
 
-                if (contas.get(i).getNumeroConta() == numeroConta) {
-                    if (contas.get(i).getSaldo() >= valorSacado) {
-                        contas.get(i).sacar(valorSacado);
+                if (conta.getNumeroConta() == numeroConta) {
+                    if (conta.getSaldo() >= valorSacado) {
+                        conta.sacar(valorSacado);
                         return true;
                     } else {
                         return false;
@@ -121,12 +110,12 @@ public class GerenciarContas {
         return false;
     }
 
-    public boolean depositar(int numeroConta, double valorSacado) {
+    public boolean depositar(int numeroConta, double valorDepositado) {
 
-        if (valorSacado > 0) {
-            for (int i = 0; i <= contas.size(); i++) {
-                if (contas.get(i).getNumeroConta() == numeroConta) {
-                    contas.get(i).depositar(valorSacado);
+        if (valorDepositado > 0) {
+            for (Conta conta : contas) {
+                if (conta.getNumeroConta() == numeroConta) {
+                    conta.depositar(valorDepositado);
                     return true;
                 }
             }
@@ -140,8 +129,9 @@ public class GerenciarContas {
 
     public String listarContas() {
         StringBuilder dadosContas = new StringBuilder();
-        for (int i = 0; i <= contas.size(); i++) {
-            dadosContas.append(contas.get(i).imprimir()).append("\n");
+
+        for (Conta conta : contas) {
+            dadosContas.append(conta.imprimir()).append("\n");
         }
 
         if (!dadosContas.toString().isEmpty()) {
