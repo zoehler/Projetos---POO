@@ -4,7 +4,11 @@ public class GerenciarContas {
 
     private ArrayList<Conta> contas = new ArrayList<>();
 
+<<<<<<< HEAD
     public void adicionarConta(Conta c){
+=======
+    public void adicionarConta(Conta c) {
+>>>>>>> df3796d66c872e1f5790bf5209fee64d4908c514
         contas.add(c);
     }
 
@@ -50,7 +54,7 @@ public class GerenciarContas {
 
             if (contas.get(i).getClass().equals(ContaCorrente.class)) {
                 ContaCorrente cCorrente = (ContaCorrente) contas.get(i);
-                if(cCorrente.usandoLimite()) {
+                if (cCorrente.usandoLimite()) {
                     dados.append("\nConta ").append(i).append(":\n").append(contas.get(i).imprimir());
                 }
             }
@@ -64,33 +68,69 @@ public class GerenciarContas {
 
     }
 
-    public Conta buscarConta(int numeroConta){
-        for (int i=0;i<=contas.size();i++){
-            if (contas.get(i).getNumeroConta()==numeroConta){
+    public Conta buscarConta(int numeroConta) {
+        for (int i = 0; i <= contas.size(); i++) {
+            if (contas.get(i).getNumeroConta() == numeroConta) {
                 return contas.get(i);
             }
         }
         return null;
     }
 
-    public boolean transferirValor(int numeroContaFonte, int numeroContaDestino, double valor){
-        for (int i=0;i<=contas.size();i++){
-            if (contas.get(i).getNumeroConta()==numeroContaFonte){
-                if (contas.get(i).getSaldo()>=valor){
-                    contas.get(i).sacar(valor);
+    public boolean transferirValor(int numeroContaFonte, int numeroContaDestino, double valor) {
 
-                    for (i=0;i<=contas.size();i++){
-                        if (contas.get(i).getNumeroConta()==numeroContaDestino){
-                            contas.get(i).depositar(valor);
-                        }
-                    }
-                }else return false;
-            }
-
+        int val = 0;
+        for (int i = 0; i < contas.size(); i++) {
+            if(contas.get(i).getNumeroConta() == numeroContaFonte || contas.get(i).getNumeroConta() == numeroContaDestino) val++;
         }
+        if(val == 2) {
+            if (sacar(numeroContaFonte, valor)) {
+                return depositar(numeroContaDestino, valor);
+            }
+        }
+
+        return false;
+    }
+    
+    public boolean sacar(int numeroConta, double valorSacado) {
+
+        if (valorSacado > 0) {
+            for (int i = 0; i <= contas.size(); i++) {
+                if (contas.get(i).getNumeroConta() == valorSacado) {
+                    if (contas.get(i).getSaldo() >= valorSacado) {
+                        contas.get(i).sacar(valorSacado);
+                        return true;
+                    } else {
+                        return false;
+                    }
+                }
+
+            }
+        } else {
+            return false;
+        }
+
         return false;
     }
 
+    public boolean depositar(int numeroConta, double valorSacado) {
+
+        if (valorSacado > 0) {
+            for (int i = 0; i <= contas.size(); i++) {
+                if (contas.get(i).getNumeroConta() == numeroConta) {
+                    contas.get(i).depositar(valorSacado);
+                    return true;
+                }
+            }
+        } else {
+            return false;
+        }
+
+        return false;
+
+    }
+
+<<<<<<< HEAD
 
     public String listarContas(){
         String dadosContas = null;
@@ -103,5 +143,7 @@ public class GerenciarContas {
         }
         return dadosContas;
     }
+=======
+>>>>>>> df3796d66c872e1f5790bf5209fee64d4908c514
 
 }
