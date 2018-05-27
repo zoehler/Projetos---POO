@@ -37,11 +37,10 @@ public abstract class Conta {
         this.saldo = saldo;
     }
 
-    public Conta(String numeroConta, String nomeCliente, String cpfCliente, double saldo) {
+    public Conta(String numeroConta, String nomeCliente, String cpfCliente) {
         setNumeroConta(numeroConta);
         setNomeCliente(nomeCliente);
         setCpfCliente(cpfCliente);
-        setSaldo(saldo);
     }
 
 
@@ -72,10 +71,10 @@ public abstract class Conta {
 
     public String imprimir() {
 
-        return "<br>Num. Conta: " + getNumeroConta()
-                + "<br>Nome: " + getNomeCliente()
-                + "<br>CPF: " + getCpfCliente()
-                + "<br>Saldo: " + getSaldo();
+        return "\nNum. Conta: " + getNumeroConta()
+                + "\nNome: " + getNomeCliente()
+                + "\nCPF: " + getCpfCliente()
+                + "\nSaldo: " + getSaldo();
 
     }
 }
