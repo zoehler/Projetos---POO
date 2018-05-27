@@ -1,15 +1,15 @@
 public abstract class Conta {
 
-    String numeroConta;
+    int numeroConta;
     String nomeCliente;
     String cpfCliente;
     double saldo;
 
-    public String getNumeroConta() {
+    public int getNumeroConta() {
         return numeroConta;
     }
 
-    private void setNumeroConta(String numeroConta) {
+    private void setNumeroConta(int numeroConta) {
         this.numeroConta = numeroConta;
     }
 
@@ -37,7 +37,7 @@ public abstract class Conta {
         this.saldo = saldo;
     }
 
-    public Conta(String numeroConta, String nomeCliente, String cpfCliente, double saldo) {
+    public Conta(int numeroConta, String nomeCliente, String cpfCliente, double saldo) {
         setNumeroConta(numeroConta);
         setNomeCliente(nomeCliente);
         setCpfCliente(cpfCliente);
