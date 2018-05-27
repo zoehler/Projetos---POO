@@ -2,21 +2,21 @@ public class ContaCorrente extends Conta {
 
     private double limite;
 
-    public ContaCorrente(String numeroConta, String nomeCliente, String cpfCliente, double saldo) {
+    public ContaCorrente(int numeroConta, String nomeCliente, String cpfCliente, double saldo) {
         super(numeroConta, nomeCliente, cpfCliente, saldo);
     }
 
-    public ContaCorrente(double limite, String numeroConta, String nomeCliente, String cpfCliente, double saldo) {
+    public ContaCorrente(double limite, int numeroConta, String nomeCliente, String cpfCliente, double saldo) {
         super(numeroConta, nomeCliente, cpfCliente, saldo);
         setLimite(limite);
 
     }
 
-    public double getLimite() {
+    protected double getLimite() {
         return limite;
     }
 
-    public void setLimite(double limite) {
+    protected void setLimite(double limite) {
         this.limite = limite;
     }
 
