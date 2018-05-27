@@ -4,12 +4,18 @@ public class GerenciarContas {
 
     private ArrayList<Conta> contas = new ArrayList<>();
 
-<<<<<<< HEAD
-    public void adicionarConta(Conta c){
-=======
     public void adicionarConta(Conta c) {
->>>>>>> df3796d66c872e1f5790bf5209fee64d4908c514
-        contas.add(c);
+
+        boolean validation = false;
+        int maior = 0;
+        for (Conta conta : contas) {
+            validation = conta.getNumeroConta() == c.getNumeroConta();
+            if (conta.getNumeroConta() > maior) maior = conta.getNumeroConta();
+        }
+        if (validation) {
+            contas.add(c);
+        }
+
     }
 
     public boolean removerConta(int numeroConta) {
@@ -28,12 +34,9 @@ public class GerenciarContas {
 
         StringBuilder dados = new StringBuilder();
 
-        for (int i = 0; i < contas.size(); i++) {
-
-            if (contas.get(i).getClass().equals(ContaEspecial.class)) {
-
-                dados.append("\nConta ").append(i).append(":\n").append(contas.get(i).imprimir());
-
+        for (Conta conta : contas) {
+            if (conta.getClass().equals(ContaEspecial.class)) {
+                dados.append(conta.imprimir()).append("\n");
             }
 
         }
@@ -45,7 +48,6 @@ public class GerenciarContas {
         }
 
     }
-
 
     public String buscarClientesUsandoLimite() {
         StringBuilder dados = new StringBuilder();
@@ -79,11 +81,13 @@ public class GerenciarContas {
 
     public boolean transferirValor(int numeroContaFonte, int numeroContaDestino, double valor) {
 
-        int val = 0;
-        for (int i = 0; i < contas.size(); i++) {
-            if(contas.get(i).getNumeroConta() == numeroContaFonte || contas.get(i).getNumeroConta() == numeroContaDestino) val++;
+        int validation = 0;
+        for (Conta conta : contas) {
+            if (conta.getNumeroConta() == numeroContaFonte || conta.getNumeroConta() == numeroContaDestino) {
+                validation++;
+            }
         }
-        if(val == 2) {
+        if (validation == 2) {
             if (sacar(numeroContaFonte, valor)) {
                 return depositar(numeroContaDestino, valor);
             }
@@ -91,12 +95,13 @@ public class GerenciarContas {
 
         return false;
     }
-    
+
     public boolean sacar(int numeroConta, double valorSacado) {
 
         if (valorSacado > 0) {
             for (int i = 0; i <= contas.size(); i++) {
-                if (contas.get(i).getNumeroConta() == valorSacado) {
+
+                if (contas.get(i).getNumeroConta() == numeroConta) {
                     if (contas.get(i).getSaldo() >= valorSacado) {
                         contas.get(i).sacar(valorSacado);
                         return true;
@@ -130,20 +135,17 @@ public class GerenciarContas {
 
     }
 
-<<<<<<< HEAD
-
-    public String listarContas(){
-        String dadosContas = null;
-        for (int i=0;i<=contas.size();i++){
-            dadosContas += "Conta: " + contas.get(i).getNumeroConta()
-                    +"\nNome do cliente: " + contas.get(i).getNomeCliente()
-                    +"\nCPF: " + contas.get(i).getCpfCliente()
-                    +"\nSaldo: " + contas.get(i).getSaldo()
-                    +"\n";
+    public String listarContas() {
+        StringBuilder dadosContas = new StringBuilder();
+        for (int i = 0; i <= contas.size(); i++) {
+            dadosContas.append(contas.get(i).imprimir()).append("\n");
         }
-        return dadosContas;
+
+        if (!dadosContas.toString().isEmpty()) {
+            return dadosContas.toString();
+        } else {
+            return "Nenhuma conta localizada.";
+        }
     }
-=======
->>>>>>> df3796d66c872e1f5790bf5209fee64d4908c514
 
 }

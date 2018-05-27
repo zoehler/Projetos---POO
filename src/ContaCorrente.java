@@ -6,7 +6,7 @@ public class ContaCorrente extends Conta {
         super(numeroConta, nomeCliente, cpfCliente, saldo);
     }
 
-    public ContaCorrente(double limite, int numeroConta, String nomeCliente, String cpfCliente, double saldo) {
+    public ContaCorrente(int numeroConta, String nomeCliente, String cpfCliente, double saldo, double limite) {
         super(numeroConta, nomeCliente, cpfCliente, saldo);
         setLimite(limite);
 
