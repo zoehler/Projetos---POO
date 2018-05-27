@@ -37,10 +37,11 @@ public abstract class Conta {
         this.saldo = saldo;
     }
 
-    public Conta(String numeroConta, String nomeCliente, String cpfCliente) {
+    public Conta(String numeroConta, String nomeCliente, String cpfCliente, double saldo) {
         setNumeroConta(numeroConta);
         setNomeCliente(nomeCliente);
         setCpfCliente(cpfCliente);
+        setSaldo(saldo);
     }
 
 

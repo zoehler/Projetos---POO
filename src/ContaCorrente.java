@@ -2,12 +2,12 @@ public class ContaCorrente extends Conta {
 
     private double limite;
 
-    public ContaCorrente(String numeroConta, String nomeCliente, String cpfCliente) {
-        super(numeroConta, nomeCliente, cpfCliente);
+    public ContaCorrente(String numeroConta, String nomeCliente, String cpfCliente, double saldo) {
+        super(numeroConta, nomeCliente, cpfCliente, saldo);
     }
 
-    public ContaCorrente(double limite, String numeroConta, String nomeCliente, String cpfCliente) {
-        super(numeroConta, nomeCliente, cpfCliente);
+    public ContaCorrente(double limite, String numeroConta, String nomeCliente, String cpfCliente, double saldo) {
+        super(numeroConta, nomeCliente, cpfCliente, saldo);
         setLimite(limite);
 
     }
@@ -30,8 +30,8 @@ public class ContaCorrente extends Conta {
         }
     }
 
-    public boolean usandoLimite(){
-        if(saldo<0){
+    public boolean usandoLimite() {
+        if (saldo < 0) {
             return true;
         } else {
             return false;
@@ -39,7 +39,7 @@ public class ContaCorrente extends Conta {
     }
 
     @Override
-    public String imprimir(){
+    public String imprimir() {
         return super.imprimir() + "\nLimite da Conta: " + getLimite();
     }
 }
