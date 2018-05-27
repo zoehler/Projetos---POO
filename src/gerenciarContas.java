@@ -4,7 +4,12 @@ public class gerenciarContas {
 
     private ArrayList<Conta> contas = new ArrayList<>();
 
+<<<<<<< HEAD
     public void adicionarConta(Conta c) {
+=======
+
+    public void adicionarConta(Conta c){
+>>>>>>> 852f036e1afbc70cbc5f96ddeaf6ad395719aae9
         contas.add(c);
     }
 
@@ -59,9 +64,40 @@ public class gerenciarContas {
         if (!dados.toString().isEmpty()) {
             return dados.toString();
         } else {
-            return "Nenhum cliente localizada.";
+            return "Nenhum cliente localizado.";
         }
 
     }
+<<<<<<< HEAD
+=======
+
+    public Conta buscarConta(int numeroConta){
+        for (int i=0;i<=contas.size();i++){
+            if (contas.get(i).getNumeroConta()==numeroConta){
+                return contas.get(i);
+            }
+        }
+        return null;
+    }
+
+    public boolean transferirValor(int numeroContaFonte, int numeroContaDestino, double valor){
+        for (int i=0;i<=contas.size();i++){
+            if (contas.get(i).getNumeroConta()==numeroContaFonte){
+                if (contas.get(i).getSaldo()>=valor){
+                    contas.get(i).sacar(valor);
+
+                    for (i=0;i<=contas.size();i++){
+                        if (contas.get(i).getNumeroConta()==numeroContaDestino){
+                            contas.get(i).depositar(valor);
+                        }
+                    }
+                }else return false;
+            }
+
+        }
+        return false;
+    }
+
+>>>>>>> 852f036e1afbc70cbc5f96ddeaf6ad395719aae9
 
 }
