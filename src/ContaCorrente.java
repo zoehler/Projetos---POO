@@ -12,26 +12,47 @@ public class ContaCorrente extends Conta {
 
     }
 
-    protected double getLimite() {
+    public double getLimite() {
         return limite;
     }
 
-    protected void setLimite(double limite) {
+    public void setLimite(double limite) {
         this.limite = limite;
     }
 
+    @Override
     public boolean sacar(double valorSacado) {
 
-        if (valorSacado <= getLimite() && valorSacado > 0) {
-            setLimite(getLimite() - valorSacado);
-            return true;
+        if (valorSacado > 0 && getSaldo() > 0) {
+
+            double tempSaldo = getSaldo() - valorSacado;
+
+            if (tempSaldo < 0) {
+                if (getLimite() >= getSaldo()) {
+                    setSaldo(tempSaldo);
+                    setLimite(getLimite() + getSaldo());
+                    return true;
+                } else {
+                    return false;
+                }
+            } else {
+                setSaldo(tempSaldo);
+                return true;
+            }
+
+
         } else {
-            return false;
+            if (getLimite() >= valorSacado) {
+                setLimite(getLimite() - valorSacado);
+                return true;
+            } else {
+                return false;
+            }
         }
     }
 
     public boolean usandoLimite() {
-        if (saldo < 0) {
+        if (getSaldo() < 0) {
             return true;
         } else {
             return false;

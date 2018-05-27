@@ -33,7 +33,7 @@ public abstract class Conta {
         return saldo;
     }
 
-    private void setSaldo(double saldo) {
+    protected void setSaldo(double saldo) {
         this.saldo = saldo;
     }
 

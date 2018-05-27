@@ -1,38 +1,40 @@
 import java.util.ArrayList;
 
-public class GerenciarContas {
+public class gerenciarContas {
 
     private ArrayList<Conta> contas = new ArrayList<>();
 
-<<<<<<< HEAD
-    public void adicionarConta(Conta c){
+    public void adicionarConta(Conta c) {
         contas.add(c);
     }
 
-    public boolean removerConta(int numeroConta){
-        for (int i=0;i<=contas.size();i++){
-            if (contas.get(i).getNumeroConta()==numeroConta){
+    public boolean removerConta(int numeroConta) {
+
+        for (int i = 0; i <= contas.size(); i++) {
+            if (contas.get(i).getNumeroConta() == numeroConta) {
                 contas.remove(i);
                 return true;
             }
         }
+
         return false;
     }
 
-=======
     public String buscarContasEspeciais() {
 
         StringBuilder dados = new StringBuilder();
 
         for (int i = 0; i < contas.size(); i++) {
 
-            if(contas.get(i).getClass().equals(ContaEspecial.class)){
+            if (contas.get(i).getClass().equals(ContaEspecial.class)) {
+
                 dados.append("\nConta ").append(i).append(":\n").append(contas.get(i).imprimir());
+
             }
 
         }
 
-        if(!dados.toString().isEmpty()) {
+        if (!dados.toString().isEmpty()) {
             return dados.toString();
         } else {
             return "Nenhuma conta especial localizada.";
@@ -46,20 +48,20 @@ public class GerenciarContas {
 
         for (int i = 0; i < contas.size(); i++) {
 
-            if(contas.get(i).getClass().equals(ContaCorrente.class)){
-
-                dados.append("\nConta ").append(i).append(":\n").append(contas.get(i).imprimir());
+            if (contas.get(i).getClass().equals(ContaCorrente.class)) {
+                ContaCorrente cCorrente = (ContaCorrente) contas.get(i);
+                if(cCorrente.usandoLimite()) {
+                    dados.append("\nConta ").append(i).append(":\n").append(contas.get(i).imprimir());
+                }
             }
-
         }
 
-        if(!dados.toString().isEmpty()) {
+        if (!dados.toString().isEmpty()) {
             return dados.toString();
         } else {
             return "Nenhum cliente localizada.";
         }
 
     }
->>>>>>> 15d5e375b602f9bf2d620df4cc688e1b2b2b6abf
 
 }
