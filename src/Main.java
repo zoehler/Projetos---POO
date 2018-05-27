@@ -11,14 +11,16 @@ public class Main {
         System.out.println("Bem vindo ao Santo André, o vermelhinho!");
 
         do {
-            System.out.println("\nPara criar uma nova conta pressione 1;" + "\nPara acessar uma conta existente pressione 2;" + "\nPara opções administrativas pressione 3;" + "\nPara sair pressione 0.");
+            System.out.println("\nPara criar uma nova conta pressione 1;" +
+                    "\nPara acessar uma conta existente pressione 2;" +
+                    "\nPara opções administrativas pressione 3;" +
+                    "\nPara sair pressione 0.");
             try {
                 boolean loopConta = true;
-                switch (entradaInt.nextInt()) {
+                switch (Integer.parseInt(entradaInt.next())) {
                     case 1:
                         //Inserção de nova conta
                         do {
-                            System.out.println("\nPara conta corrente pressione 1;" + "\nPara conta poupança pressione 2;" + "\nPara conta especial pressione 3;" + "\nPara voltar ao menu inicial pressione 0");
                             try {
                                 System.out.println("Insira seu nome completo: ");
                                 String nomeCliente = entradaText.nextLine();
@@ -29,7 +31,7 @@ public class Main {
                                 do {
                                     try {
                                         System.out.println("Insira o numero de sua conta (valor inteiro e positivo):");
-                                        nConta = entradaInt.nextInt();
+                                        nConta = Integer.parseInt(entradaInt.next());
                                         if (nConta > 0) {
                                             if (manager.buscarConta(nConta) == null) {
                                                 contaValida = true;
@@ -41,7 +43,7 @@ public class Main {
                                         }
                                     }
                                     catch (Exception e) {
-                                        System.out.println("Insira um valor válido.");
+                                        System.out.println("Insira um valor válido. Erro: " + e.getLocalizedMessage());
                                     }
                                 } while (!contaValida);
 
@@ -49,22 +51,31 @@ public class Main {
                                 do {
                                     try {
                                         System.out.println("Insira primeiro depósito de sua conta (valor positivo):");
-                                        depositoInicial = entradaInt.nextInt();
+                                        depositoInicial = Integer.parseInt(entradaInt.next());
                                     }
                                     catch (Exception e) {
                                         System.out.println("Insira um valor válido.");
                                     }
                                 } while (depositoInicial <= 0);
+                                System.out.println("Selecione o tipo de conta: ");
+                                System.out.println("\nPara conta corrente pressione 1;" +
+                                        "\nPara conta poupança pressione 2;" +
+                                        "\nPara conta especial pressione 3;" +
+                                        "\nPara voltar ao menu inicial pressione 0");
 
                                 switch (entradaInt.nextInt()) {
                                     case 1:
                                         manager.adicionarConta(new ContaCorrente(nConta, nomeCliente, cpfCliente, depositoInicial, 1500));
                                         System.out.println("Conta corrente selecionada; ");
                                         System.out.println("Seu limite inicial é de 1500;");
+                                        System.out.println("Voltando ao menu principal.");
+                                        loopConta = false;
                                         break;
                                     case 2:
                                         manager.adicionarConta(new ContaPoupanca(nConta, nomeCliente, cpfCliente, depositoInicial));
                                         System.out.println("Conta poupança criada; ");
+                                        System.out.println("Voltando ao menu principal.");
+                                        loopConta = false;
                                         break;
                                     case 3:
                                         System.out.println("Insira o nome de seu Gerente: ");
@@ -72,6 +83,8 @@ public class Main {
                                         manager.adicionarConta(new ContaEspecial(nConta, nomeCliente, cpfCliente, depositoInicial, 3000, nomeGerente));
                                         System.out.println("Conta especial criada; ");
                                         System.out.println("Seu limite inicial é de 3000;");
+                                        System.out.println("Voltando ao menu principal.");
+                                        loopConta = false;
                                         break;
                                     case 0:
                                         loopConta = false;
@@ -100,8 +113,12 @@ public class Main {
                         } while (thisConta <= 0);
 
                         do {
-                            System.out.println("\nPara depósito pressione 1;" + "\nPara saque pressione 2;" + "\nPara transferência pressione 3;" + "\nPara remover a conta do sistema pressione 4;" + "\nPara voltar ao menu inicial pressione 0");
-                            switch (entradaInt.nextInt()) {
+                            System.out.println("\nPara depósito pressione 1;" +
+                                    "\nPara saque pressione 2;" +
+                                    "\nPara transferência pressione 3;" +
+                                    "\nPara remover a conta do sistema pressione 4;" +
+                                    "\nPara voltar ao menu inicial pressione 0");
+                            switch (Integer.parseInt(entradaInt.next())) {
                                 case 1:
                                     double valorD = 0;
                                     do {

@@ -71,12 +71,15 @@ public class GerenciarContas {
     }
 
     public Conta buscarConta(int numeroConta) {
-        for (int i = 0; i <= contas.size(); i++) {
-            if (contas.get(i).getNumeroConta() == numeroConta) {
-                return contas.get(i);
+        if (contas.size() > 0) {
+            for (Conta conta : contas) {
+                if (conta.getNumeroConta() == numeroConta) {
+                    return conta;
+                }
             }
         }
         return null;
+
     }
 
     public boolean transferirValor(int numeroContaFonte, int numeroContaDestino, double valor) {
