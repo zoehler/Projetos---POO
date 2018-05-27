@@ -1,15 +1,10 @@
 import java.util.ArrayList;
 
-public class gerenciarContas {
+public class GerenciarContas {
 
     private ArrayList<Conta> contas = new ArrayList<>();
 
-<<<<<<< HEAD
-    public void adicionarConta(Conta c) {
-=======
-
     public void adicionarConta(Conta c){
->>>>>>> 852f036e1afbc70cbc5f96ddeaf6ad395719aae9
         contas.add(c);
     }
 
@@ -68,8 +63,6 @@ public class gerenciarContas {
         }
 
     }
-<<<<<<< HEAD
-=======
 
     public Conta buscarConta(int numeroConta){
         for (int i=0;i<=contas.size();i++){
@@ -98,6 +91,17 @@ public class gerenciarContas {
         return false;
     }
 
->>>>>>> 852f036e1afbc70cbc5f96ddeaf6ad395719aae9
+
+    public String listarContas(){
+        String dadosContas = null;
+        for (int i=0;i<=contas.size();i++){
+            dadosContas += "Conta: " + contas.get(i).getNumeroConta()
+                    +"\nNome do cliente: " + contas.get(i).getNomeCliente()
+                    +"\nCPF: " + contas.get(i).getCpfCliente()
+                    +"\nSaldo: " + contas.get(i).getSaldo()
+                    +"\n";
+        }
+        return dadosContas;
+    }
 
 }
