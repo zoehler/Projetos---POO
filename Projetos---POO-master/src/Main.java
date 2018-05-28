@@ -44,22 +44,12 @@ public class Main {
                                     }
                                 } while (!contaValida);
 
-                                double depositoInicial = 0;
-                                do {
-                                    try {
-                                        System.out.println("Insira primeiro depósito de sua conta (valor positivo):");
-                                        depositoInicial = Integer.parseInt(entradaInt.next());
-                                    }
-                                    catch (Exception e) {
-                                        System.out.println("Insira um valor válido.");
-                                    }
-                                } while (depositoInicial <= 0);
                                 System.out.println("Selecione o tipo de conta: ");
                                 System.out.println("\nPara conta corrente pressione 1;" + "\nPara conta poupança pressione 2;" + "\nPara conta especial pressione 3;");
 
                                 switch (Integer.parseInt(entradaInt.next())) {
                                     case 1:
-                                        manager.adicionarConta(new ContaCorrente(nConta, nomeCliente, cpfCliente, depositoInicial));
+                                        manager.adicionarConta(new ContaCorrente(nConta, nomeCliente, cpfCliente));
                                         System.out.println("Conta corrente criada; ");
                                         System.out.println("Seu limite inicial é de 1500;");
                                         System.out.println("Voltando ao menu principal.");
@@ -74,7 +64,7 @@ public class Main {
                                     case 3:
                                         System.out.println("Insira o nome de seu Gerente: ");
                                         String nomeGerente = entradaText.nextLine();
-                                        manager.adicionarConta(new ContaEspecial(nConta, nomeCliente, cpfCliente, depositoInicial, nomeGerente));
+                                        manager.adicionarConta(new ContaEspecial(nConta, nomeCliente, cpfCliente, nomeGerente));
                                         System.out.println("Conta especial criada; ");
                                         System.out.println("Seu limite inicial é de 3000;");
                                         System.out.println("Voltando ao menu principal.");
