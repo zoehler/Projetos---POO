@@ -92,16 +92,13 @@ public class GerenciarContas {
 
         if (valorSacado > 0) {
             for (Conta conta : contas) {
-
                 if (conta.getNumeroConta() == numeroConta) {
-                    if (conta.getSaldo() >= valorSacado) {
-                        conta.sacar(valorSacado);
-                        return true;
+                    if (conta instanceof ContaCorrente) {
+                        return conta.sacar(valorSacado);
                     } else {
-                        return false;
+                        return conta.sacar(valorSacado);
                     }
                 }
-
             }
         } else {
             return false;

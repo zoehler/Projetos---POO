@@ -1,14 +1,14 @@
-public class ContaEspecial extends ContaCorrente{
+public class ContaEspecial extends ContaCorrente {
 
     private String nomeGerente;
 
-    public ContaEspecial(int numeroConta, String nomeCliente, String cpfCliente, double saldo, String nomeGerente){
-        super(numeroConta, nomeCliente, cpfCliente, saldo);
+    public ContaEspecial(int numeroConta, String nomeCliente, String cpfCliente, String nomeGerente) {
+        super(numeroConta, nomeCliente, cpfCliente);
         setNomeGerente(nomeGerente);
     }
 
-    public ContaEspecial(int numeroConta, String nomeCliente, String cpfCliente, double saldo, double limite, String nomeGerente){
-        super(numeroConta, nomeCliente, cpfCliente, saldo, limite);
+    public ContaEspecial(int numeroConta, String nomeCliente, String cpfCliente, double limite, String nomeGerente) {
+        super(numeroConta, nomeCliente, cpfCliente, limite);
         setNomeGerente(nomeGerente);
     }
 
@@ -21,7 +21,7 @@ public class ContaEspecial extends ContaCorrente{
     }
 
     @Override
-    public String imprimir(){
+    public String imprimir() {
         return super.imprimir() + "\nNome do gerente: " + getNomeGerente();
     }
 }

@@ -1,7 +1,7 @@
 public class ContaPoupanca extends Conta {
 
-    public ContaPoupanca(int numeroConta, String nomeCliente, String cpfCliente, double saldo) {
-        super(numeroConta, nomeCliente, cpfCliente, saldo);
+    public ContaPoupanca(int numeroConta, String nomeCliente, String cpfCliente) {
+        super(numeroConta, nomeCliente, cpfCliente);
     }
 
     public void calcularRendimento(double porcentagemRendimento) {

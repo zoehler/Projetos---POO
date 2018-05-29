@@ -2,12 +2,12 @@ public class ContaCorrente extends Conta {
 
     private double limite;
 
-    public ContaCorrente(int numeroConta, String nomeCliente, String cpfCliente, double saldo) {
-        super(numeroConta, nomeCliente, cpfCliente, saldo);
+    public ContaCorrente(int numeroConta, String nomeCliente, String cpfCliente) {
+        super(numeroConta, nomeCliente, cpfCliente);
     }
 
-    public ContaCorrente(int numeroConta, String nomeCliente, String cpfCliente, double saldo, double limite) {
-        super(numeroConta, nomeCliente, cpfCliente, saldo);
+    public ContaCorrente(int numeroConta, String nomeCliente, String cpfCliente, double limite) {
+        super(numeroConta, nomeCliente, cpfCliente);
         setLimite(limite);
 
     }
@@ -22,41 +22,20 @@ public class ContaCorrente extends Conta {
 
     @Override
     public boolean sacar(double valorSacado) {
-
-        if (valorSacado > 0 && getSaldo() > 0) {
-
-            double tempSaldo = getSaldo() - valorSacado;
-
-            if (tempSaldo < 0) {
-                if (getLimite() >= getSaldo()) {
-                    setSaldo(tempSaldo);
-                    setLimite(getLimite() + getSaldo());
-                    return true;
-                } else {
-                    return false;
-                }
-            } else {
-                setSaldo(tempSaldo);
-                return true;
-            }
-
-
-        } else {
-            if (getLimite() >= valorSacado) {
-                setLimite(getLimite() - valorSacado);
+        if (valorSacado > 0) {
+            if (getSaldo() - valorSacado > (getLimite() * -1)) {
+                setSaldo(getSaldo() - valorSacado);
                 return true;
             } else {
                 return false;
             }
+        } else {
+            return false;
         }
     }
 
     public boolean usandoLimite() {
-        if (getSaldo() < 0) {
-            return true;
-        } else {
-            return false;
-        }
+        return getSaldo() < 0;
     }
 
     @Override

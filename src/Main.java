@@ -44,29 +44,19 @@ public class Main {
                                     }
                                 } while (!contaValida);
 
-                                double depositoInicial = 0;
-                                do {
-                                    try {
-                                        System.out.println("Insira primeiro depósito de sua conta (valor positivo):");
-                                        depositoInicial = Integer.parseInt(entradaInt.next());
-                                    }
-                                    catch (Exception e) {
-                                        System.out.println("Insira um valor válido.");
-                                    }
-                                } while (depositoInicial <= 0);
                                 System.out.println("Selecione o tipo de conta: ");
                                 System.out.println("\nPara conta corrente pressione 1;" + "\nPara conta poupança pressione 2;" + "\nPara conta especial pressione 3;");
 
                                 switch (Integer.parseInt(entradaInt.next())) {
                                     case 1:
-                                        manager.adicionarConta(new ContaCorrente(nConta, nomeCliente, cpfCliente, depositoInicial, 1500));
+                                        manager.adicionarConta(new ContaCorrente(nConta, nomeCliente, cpfCliente, 1500));
                                         System.out.println("Conta corrente criada; ");
                                         System.out.println("Seu limite inicial é de 1500;");
                                         System.out.println("Voltando ao menu principal.");
                                         loopConta = false;
                                         break;
                                     case 2:
-                                        manager.adicionarConta(new ContaPoupanca(nConta, nomeCliente, cpfCliente, depositoInicial));
+                                        manager.adicionarConta(new ContaPoupanca(nConta, nomeCliente, cpfCliente));
                                         System.out.println("Conta poupança criada; ");
                                         System.out.println("Voltando ao menu principal.");
                                         loopConta = false;
@@ -74,7 +64,7 @@ public class Main {
                                     case 3:
                                         System.out.println("Insira o nome de seu Gerente: ");
                                         String nomeGerente = entradaText.nextLine();
-                                        manager.adicionarConta(new ContaEspecial(nConta, nomeCliente, cpfCliente, depositoInicial, 3000, nomeGerente));
+                                        manager.adicionarConta(new ContaEspecial(nConta, nomeCliente, cpfCliente, 3000, nomeGerente));
                                         System.out.println("Conta especial criada; ");
                                         System.out.println("Seu limite inicial é de 3000;");
                                         System.out.println("Voltando ao menu principal.");
@@ -147,7 +137,8 @@ public class Main {
                                     } while (!depositoOk);
 
                                     if (manager.depositar(thisConta.getNumeroConta(), valorD)) {
-                                        System.out.println("Depósito realizado com sucesso.");
+                                        thisConta = manager.buscarConta(thisConta.getNumeroConta());
+                                        System.out.println("Depósito realizado com sucesso.\nNovo saldo: " + thisConta.getSaldo());
                                     } else {
                                         System.out.println("Falha ao depositar.");
                                     }
@@ -169,9 +160,13 @@ public class Main {
                                     } while (!saqueOk);
 
                                     if (manager.sacar(thisConta.getNumeroConta(), valorS)) {
-                                        System.out.println("Saque realizado com sucesso.");
+                                        thisConta = manager.buscarConta(thisConta.getNumeroConta());
+                                        System.out.println("Saque realizado com sucesso.\nNovo saldo: " + thisConta.getSaldo());
+                                        if(thisConta instanceof ContaCorrente) System.out.println("Limite: " + ((ContaCorrente) thisConta).getLimite());
                                     } else {
                                         System.out.println("Saldo insuficiente.");
+                                        System.out.println("Saldo: " + thisConta.getSaldo());
+                                        if(thisConta instanceof ContaCorrente) System.out.println("Limite: " + ((ContaCorrente) thisConta).getLimite());
                                     }
                                     break;
                                 case 3:
@@ -205,7 +200,8 @@ public class Main {
                                     } while (!transferenciaOk);
 
                                     if (manager.transferirValor(thisConta.getNumeroConta(), contaDestino.getNumeroConta(), valorT)) {
-                                        System.out.println("Transferência realizada com sucesso.");
+                                        thisConta = manager.buscarConta(thisConta.getNumeroConta());
+                                        System.out.println("Transferência realizada com sucesso.\nNovo saldo da conta de origem: " + thisConta.getSaldo());
                                     } else {
                                         System.out.println("Transferência não efetuada. Saldo insufiente.");
                                     }
@@ -216,6 +212,8 @@ public class Main {
                                         break;
                                     } else {
                                         System.out.println("Conta removida com sucesso.\nVoltando ao menu principal.");
+                                        loopConta = false;
+                                        break;
                                     }
                                 case 5:
                                     if (thisConta instanceof ContaCorrente) {

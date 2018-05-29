@@ -37,18 +37,17 @@ public abstract class Conta {
         this.saldo = saldo;
     }
 
-    public Conta(int numeroConta, String nomeCliente, String cpfCliente, double saldo) {
+    public Conta(int numeroConta, String nomeCliente, String cpfCliente) {
         setNumeroConta(numeroConta);
         setNomeCliente(nomeCliente);
         setCpfCliente(cpfCliente);
-        setSaldo(saldo);
     }
 
 
     public boolean sacar(double valorSacado) {
 
-        if(valorSacado <= getSaldo() && valorSacado > 0){
-            setSaldo(getSaldo()-valorSacado);
+        if (valorSacado <= getSaldo() && valorSacado > 0) {
+            setSaldo(getSaldo() - valorSacado);
             return true;
         } else {
             return false;
@@ -59,8 +58,8 @@ public abstract class Conta {
 
     public boolean depositar(double valorDepositado) {
 
-        if(valorDepositado > 0){
-            setSaldo(getSaldo()+valorDepositado);
+        if (valorDepositado > 0) {
+            setSaldo(getSaldo() + valorDepositado);
             return true;
         } else {
             return false;
@@ -71,10 +70,7 @@ public abstract class Conta {
 
     public String imprimir() {
 
-        return "\nNum. Conta: " + getNumeroConta()
-                + "\nNome: " + getNomeCliente()
-                + "\nCPF: " + getCpfCliente()
-                + "\nSaldo: " + getSaldo();
+        return "\nNum. Conta: " + getNumeroConta() + "\nNome: " + getNomeCliente() + "\nCPF: " + getCpfCliente() + "\nSaldo: " + getSaldo();
 
     }
 }
